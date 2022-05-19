@@ -1,0 +1,29 @@
+{
+  "name": "beyanidMontayaSheehanBackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "start": "tsc && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cardenaz1101/beyanidMontayaSheehanBackend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cardenaz1101/beyanidMontayaSheehanBackend/issues"
+  },
+  "homepage": "https://github.com/cardenaz1101/beyanidMontayaSheehanBackend#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "express": "4.18.1"
+  }
+}
