@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { router as usersRouter } from "./users_svc/users_routes";
+import { router as usersRouter } from "./users/users_routes";
 
 const router = Router();
 

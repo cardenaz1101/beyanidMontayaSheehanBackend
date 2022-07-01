@@ -8,18 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const User_1 = require("../../entities/User");
 const uuid_1 = require("uuid");
 const password_handler_1 = require("../../helpers/password_handler");
+const index_1 = __importDefault(require("../../use_cases/users/index"));
 class UsersController {
     login(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(req.body);
-                console.log('i will login');
-                res.json(req.body);
+                const { email, password } = req.body;
+                const result = yield index_1.default.login(email, password);
+                res.json(result);
             }
             catch (error) {
                 next(error);
