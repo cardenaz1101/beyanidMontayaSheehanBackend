@@ -7,5 +7,6 @@ const controller = new DocumentTypesController();
 const router = Router();
 
 router.get('/getAll', controller.get);
+router.get('/getOne/:id', controller.getOneById);
 
 export { router }

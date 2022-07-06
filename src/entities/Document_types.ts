@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryColumn, BaseEntity } from "typeorm";
-
+import { Column, Entity, PrimaryColumn, BaseEntity , OneToMany} from "typeorm";
+import { Document } from "./Document";
 
 @Entity('document_types')
 export class DocumentType extends BaseEntity {
@@ -11,4 +11,8 @@ export class DocumentType extends BaseEntity {
     
     @Column ()
     price: number;
+
+    @OneToMany(() => Document, (document) => document.documentTypes)
+    documents: Document[]
+
 }   

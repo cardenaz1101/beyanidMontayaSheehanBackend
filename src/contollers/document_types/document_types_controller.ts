@@ -14,4 +14,15 @@ export class DocumentTypesController {
             next(error);
         }
     }
+
+    async getOneById(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const { params : { id } } = req;
+            
+            const result = await documentTypes.getOneById(id);
+            res.json(result);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
