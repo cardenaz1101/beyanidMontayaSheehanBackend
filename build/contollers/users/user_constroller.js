@@ -13,9 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
-const User_1 = require("../../entities/User");
-const uuid_1 = require("uuid");
-const password_handler_1 = require("../../helpers/password_handler");
 const index_1 = __importDefault(require("../../use_cases/users/index"));
 class UsersController {
     login(req, res, next) {
@@ -23,7 +20,7 @@ class UsersController {
             try {
                 const { email, password } = req.body;
                 const result = yield index_1.default.login(email, password);
-                res.json(result);
+                res.status(200).json(result);
             }
             catch (error) {
                 next(error);
@@ -33,19 +30,8 @@ class UsersController {
     signUp(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { firstName, lastName, email, document, phone, password } = req.body;
-                const hashes = (0, password_handler_1.hashPwd)(password);
-                const newUser = new User_1.User();
-                newUser.id = (0, uuid_1.v4)();
-                newUser.first_name = firstName;
-                newUser.last_name = lastName;
-                newUser.email = email;
-                newUser.document = document;
-                newUser.phone = phone;
-                newUser.password = hashes.password;
-                newUser.password_salt = hashes.password_salt;
-                yield newUser.save();
-                res.json(newUser);
+                const result = yield index_1.default.signUp(req.body);
+                res.status(200).json(result);
             }
             catch (error) {
                 next(error);

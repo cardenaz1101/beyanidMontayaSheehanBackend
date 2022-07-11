@@ -15,40 +15,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+// import createError from "http-errors";
 require("reflect-metadata");
 require("dotenv/config");
 const db_1 = require("./database/db");
 const app = (0, express_1.default)();
 const index_1 = require("./routes/index");
-// var corsOptions = {
-//     origin: '*', // Reemplazar con dominio
-//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
-// app.use(cors(corsOptions));
-// app.use(
-//     cors({
-//       methods: "GET" // only allow GET requests
-//     })
-// );
-// var corsOptions = {
-//     origin: 'http://localhost:4000', // Reemplazar con dominio
-//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-// app.use(cors());
 // app.use(express.urlencoded({extended: false}))
-app.use((0, morgan_1.default)('dev'));
+app.use((0, morgan_1.default)("dev"));
 const PORT = 4000;
-app.get('/ping', (_req, res) => {
-    res.send('pong');
+app.get("/ping", (req, res, next) => {
+    res.send("pong");
 });
-app.use('/api', index_1.router);
+app.use("/api", index_1.router);
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield db_1.AppDataSource.initialize();
-            console.log('Database connected');
+            console.log("Database connected");
             app.listen(PORT, () => {
                 console.log(`Server running on port ${PORT}`);
             });
@@ -58,4 +44,9 @@ function main() {
         }
     });
 }
+const handleErrors = (err, req, res, next) => {
+    console.log(res.statusCode);
+    res.status(500).send(err);
+};
+app.use(handleErrors);
 main();

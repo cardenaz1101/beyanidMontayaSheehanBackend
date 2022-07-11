@@ -14,26 +14,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.build = void 0;
 const User_1 = require("../../entities/User");
+const http_errors_1 = require("http-errors");
 const crypto_1 = __importDefault(require("crypto"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-// import  bcrypt from "bcryptjs";
-const ENCODING = 'hex';
-const ALGORITHM = 'sha256';
-// import { response } from "express";
+const ENCODING = "hex";
+const ALGORITHM = "sha256";
 const build = () => {
     const execute = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const user = yield getUserByLogin(email);
             const passwordCorrect = user === null ? false : validatePwd(password, user.password_salt, user.password);
-            console.log(passwordCorrect);
             if (!(user && passwordCorrect)) {
-                console.log('Invalid email or password');
+                throw new http_errors_1.InternalServerError("Invalid email or password");
             }
             const userForToken = {
                 id: user.id,
-                email: user.email
+                email: user.email,
             };
-            console.log(process.env.JWT_SECRET);
             const token = jsonwebtoken_1.default.sign(userForToken, process.env.JWT_SECRET);
             return token;
         }
@@ -43,7 +40,6 @@ const build = () => {
     });
     const getUserByLogin = (email) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log(email);
             const user = yield User_1.User.findOneBy({ email });
             return user;
         }
@@ -52,10 +48,11 @@ const build = () => {
         }
     });
     const validatePwd = (password, password_salt, hashed) => {
-        const toVerify = crypto_1.default.createHmac(ALGORITHM, password_salt)
+        const toVerify = crypto_1.default
+            .createHmac(ALGORITHM, password_salt)
             .update(password)
             .digest(ENCODING);
-        return (hashed === toVerify);
+        return hashed === toVerify;
     };
     return execute;
 };
