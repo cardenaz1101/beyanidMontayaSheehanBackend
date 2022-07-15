@@ -19,7 +19,13 @@ const build = () => {
         email: user.email,
       };
 
-      const token = jwt.sign(userForToken, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        userForToken,
+        process.env.JWT_SECRET,
+        {
+          expiresIn : "1d"
+        }
+      );
 
       return token;
     } catch (error) {

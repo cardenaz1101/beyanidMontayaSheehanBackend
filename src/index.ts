@@ -40,7 +40,7 @@ async function main() {
 }
 
 const handleErrors = (err:any ,req: Request, res: Response, next: NextFunction) =>  {
-  console.log(res.statusCode);
+  // console.log(res.statusCode);
   res.status(500).send(err);
 }
 

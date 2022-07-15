@@ -45,7 +45,7 @@ function main() {
     });
 }
 const handleErrors = (err, req, res, next) => {
-    console.log(res.statusCode);
+    // console.log(res.statusCode);
     res.status(500).send(err);
 };
 app.use(handleErrors);
