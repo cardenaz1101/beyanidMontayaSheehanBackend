@@ -10,6 +10,8 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
         if(authorization && authorization.toLowerCase().startsWith('bearer')){
             token = authorization.split(' ')[1];
             jwt.verify(token, process.env.JWT_SECRET);
+        }else{
+            throw new InternalServerError("token missing or invalid");    
         }
         next();
     } catch (error) {

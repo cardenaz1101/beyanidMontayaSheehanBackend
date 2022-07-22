@@ -31,7 +31,6 @@ const build = () => {
                 id: user.id,
                 email: user.email,
             };
-            const expiresIn = new Date().getTime() + 10;
             const token = jsonwebtoken_1.default.sign(userForToken, process.env.JWT_SECRET, {
                 expiresIn: "1d"
             });
