@@ -27,7 +27,19 @@ const build = () => {
         }
       );
 
-      return token;
+      const  { first_name, last_name, phone, document } = user;
+
+      const infoLogin = {
+        document,
+        first_name,
+        last_name,
+        email,
+        phone,
+        token,
+        
+      }
+
+      return infoLogin;
     } catch (error) {
       throw error;
     }

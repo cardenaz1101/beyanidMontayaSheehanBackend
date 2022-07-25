@@ -34,7 +34,16 @@ const build = () => {
             const token = jsonwebtoken_1.default.sign(userForToken, process.env.JWT_SECRET, {
                 expiresIn: "1d"
             });
-            return token;
+            const { first_name, last_name, phone, document } = user;
+            const infoLogin = {
+                document,
+                first_name,
+                last_name,
+                email,
+                phone,
+                token,
+            };
+            return infoLogin;
         }
         catch (error) {
             throw error;
