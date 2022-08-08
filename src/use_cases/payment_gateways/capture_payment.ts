@@ -8,7 +8,11 @@ const build = () => {
       const response = await axios.post(
         `${process.env.PAYPAL_API}/v2/checkout/orders/${token}/capture`,
         {},
-        accessToken
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
       );
       return response;
     } catch (error) {
