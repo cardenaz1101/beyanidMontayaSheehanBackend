@@ -4,8 +4,8 @@ const build = () => {
   const execute = async (token: string) => {
     try {
       const accessToken = await getPaypalToken();
-
-      const response = await axios.post(
+      
+      const { data } = await axios.post(
         `${process.env.PAYPAL_API}/v2/checkout/orders/${token}/capture`,
         {},
         {
@@ -14,7 +14,7 @@ const build = () => {
           },
         }
       );
-      return response;
+      return data;
     } catch (error) {
       throw error;
     }
