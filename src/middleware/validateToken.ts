@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { InternalServerError } from "http-errors";
 
-const validate = (req: Request, res: Response, next: NextFunction) => {
+const validate = (req: any, res: Response, next: NextFunction) => {
     try {
         const authorization = req.get('authorization');
         let token = '';
@@ -12,6 +12,12 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
             jwt.verify(token, process.env.JWT_SECRET);
         }else{
             throw new InternalServerError("token missing or invalid");    
+        }
+        const tokenDecode: any = jwt.decode(token);
+                
+        req.user = {
+            id: tokenDecode.id,
+            email: tokenDecode.email
         }
         next();
     } catch (error) {

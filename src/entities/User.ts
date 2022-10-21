@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryColumn, BaseEntity } from "typeorm";
-
+import { Column, Entity, PrimaryColumn, BaseEntity, OneToMany } from "typeorm";
+import { DocumentTypeUser } from "./Documents_types_users";
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -26,6 +26,9 @@ export class User extends BaseEntity {
 
     @Column ()
     password_salt: string;
+
+    @OneToMany(() => DocumentTypeUser, (documentsTypesUsers) => documentsTypesUsers.users)
+    documentsTypesUsers: DocumentTypeUser[]
 
     // @CreateDateColumn ()
     // createdAt: Date;

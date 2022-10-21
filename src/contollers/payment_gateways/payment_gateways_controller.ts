@@ -25,9 +25,11 @@ export class PaymentGatewaysController {
   ): Promise<void> {
     try {
       const {
-        params: { token },
+        params: { token , documentTypesId},
+        user: { id }
       } = req;
-      const result = await paymentGateways.capturePayment(token);
+      
+      const result = await paymentGateways.capturePayment(token, id, documentTypesId);
       res.json(result);
     } catch (error) {
       next(error);

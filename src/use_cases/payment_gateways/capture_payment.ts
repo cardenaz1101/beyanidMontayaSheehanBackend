@@ -1,7 +1,11 @@
 import axios from "axios";
+import { User } from "../../entities/User";
+import { DocumentType } from "../../entities/Document_types";
+import { DocumentTypeUser } from "../../entities/Documents_types_users";
+import { v4 as uuidv4 } from "uuid";
 
 const build = () => {
-  const execute = async (token: string) => {
+  const execute = async (token: string, userId: string, documentTypesId: string) => {
     try {
       const accessToken = await getPaypalToken();
       
@@ -14,6 +18,23 @@ const build = () => {
           },
         }
       );
+      if(data.status == "COMPLETED"){
+        const [ userFound, documentTypeFound ] = await Promise.all([
+          User.findOneBy({ id: userId }),
+          DocumentType.findOneBy({ id: documentTypesId })
+        ]);
+        const { price } = documentTypeFound;
+
+        const newPurchase = new DocumentTypeUser();
+        newPurchase.id = uuidv4();
+        newPurchase.users = userFound;
+        newPurchase.documentTypes = documentTypeFound;
+        newPurchase.url = 'TEST';
+        newPurchase.price = price;
+
+        await newPurchase.save();
+      }
+
       return data;
     } catch (error) {
       throw error;

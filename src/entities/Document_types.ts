@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryColumn, BaseEntity , OneToMany} from "typeorm";
 import { Document } from "./Document";
+import { DocumentTypeUser } from "./Documents_types_users";
 
 @Entity('document_types')
 export class DocumentType extends BaseEntity {
@@ -14,5 +15,8 @@ export class DocumentType extends BaseEntity {
 
     @OneToMany(() => Document, (document) => document.documentTypes)
     documents: Document[]
+
+    @OneToMany(() => DocumentTypeUser, (documentsTypesUsers) => documentsTypesUsers.documentTypes)
+    documentsTypes: DocumentTypeUser[]
 
 }   
