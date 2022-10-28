@@ -6,6 +6,6 @@ const controller = new PaymentGatewaysController();
 const router = Router();
 
 router.get('/createPayment/:documentTypesId', controller.createPayment)
-router.get('/capturePayment/:token', controller.capturePayment)
+router.get('/capturePayment/:token/:documentTypesId', controller.capturePayment)
 
 export { router }
