@@ -14,7 +14,7 @@ export class DocumentTypeUser extends BaseEntity {
     url: string;
 
     @ManyToOne(() => User, (user) => user.documentsTypesUsers)
-    users: User
+    public users!: User
 
     @ManyToOne(() => DocumentType, (documentType) => documentType.documentsTypes)
     documentTypes: DocumentType

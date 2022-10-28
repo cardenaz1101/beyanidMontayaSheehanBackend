@@ -1,18 +1,36 @@
 import { DocumentType } from "../../entities/Document_types";
+import { DocumentTypeUser } from "../../entities/Documents_types_users";
 import { NotFound } from "http-errors";
 
 const build = () => {
-  const execute = async (id: string) => {
+  const execute = async (
+    id: string,
+    usersId: string
+  ) => {
     try {
-      const documentType = await DocumentType.getRepository()
-        .createQueryBuilder("document_types")
-        .where("document_types.id = :id", { id })
-        .leftJoinAndSelect("document_types.documents", "documents")
-        .getMany();
+      const [documentType, documentTypeUser] = await Promise.all([
+        DocumentType.getRepository()
+          .createQueryBuilder("document_types")
+          .where("document_types.id = :id", { id })
+          .leftJoinAndSelect("document_types.documents", "documents")
+          .getMany(),
+        DocumentTypeUser.getRepository()
+          .createQueryBuilder("documents_types_users")
+          .where(
+            "documents_types_users.usersId = :usersId and documents_types_users.documentTypesId = :id",
+            { usersId, id }
+          )
+          .getOne(),
+      ]);
 
       if (!documentType) throw new NotFound("document type does not exist");
 
-      return documentType;
+      const purchased = documentTypeUser ? true : false;
+
+      return {
+        documentType,
+        purchased,
+      };
     } catch (error) {
       throw error;
     }
