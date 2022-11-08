@@ -8,12 +8,7 @@ const build = () => {
     usersId: string
   ) => {
     try {
-
-      console.log("this is a test");
-      
-
       const [documentType, documentTypeUser] = await Promise.all([
-        
         DocumentType.getRepository()
           .createQueryBuilder("document_types")
           .where("document_types.id = :id", { id })
