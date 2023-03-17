@@ -13,6 +13,9 @@ export class Document extends BaseEntity {
     @Column ()
     url: string;
 
+    @Column ()
+    type: string;
+
     @ManyToOne(() => DocumentType, (documentType) => documentType.documents)
     documentTypes: DocumentType
 }   

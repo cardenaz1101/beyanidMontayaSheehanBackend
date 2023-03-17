@@ -3,6 +3,7 @@ import { User } from "../entities/User";
 import { DocumentType } from "../entities/Document_types";
 import { Document } from "../entities/Document";
 import { DocumentTypeUser } from "../entities/Documents_types_users";
+import { Category } from "../entities/Categories";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
     username: "postgres",
     password: "root",
     database: "beyanidMontayaSheehan",
-    entities: [User, DocumentType, Document, DocumentTypeUser],
+    entities: [User, DocumentType, Document, DocumentTypeUser, Category],
     logging: true,
     //synchronize: true,
 })
