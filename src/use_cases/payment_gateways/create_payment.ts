@@ -27,8 +27,10 @@ const build = () => {
           brand_name: "Tu empresa.com",
           landing_page: "NO_PREFERENCE",
           user_action: "PAY_NOW",
-          return_url: "http://localhost:8080/paymentProcess",
-          cancel_url: "http://localhost:4000/api/cancel-payment",
+          // return_url: "http://localhost:8080/paymentProcess",
+          // cancel_url: "http://localhost:4000/api/cancel-payment",
+          return_url: "https://leyinmigracion.us/paymentProcess",
+          cancel_url: "https://leyinmigracion.us/api/cancel-payment",
         },
       };
 
