@@ -6,6 +6,7 @@ const User_1 = require("../entities/User");
 const Document_types_1 = require("../entities/Document_types");
 const Document_1 = require("../entities/Document");
 const Documents_types_users_1 = require("../entities/Documents_types_users");
+const Categories_1 = require("../entities/Categories");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
     host: "localhost",
@@ -13,7 +14,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     username: "postgres",
     password: "root",
     database: "beyanidMontayaSheehan",
-    entities: [User_1.User, Document_types_1.DocumentType, Document_1.Document, Documents_types_users_1.DocumentTypeUser],
+    entities: [User_1.User, Document_types_1.DocumentType, Document_1.Document, Documents_types_users_1.DocumentTypeUser, Categories_1.Category],
     logging: true,
     //synchronize: true,
 });

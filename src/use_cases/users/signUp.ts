@@ -12,7 +12,7 @@ const build = () => {
 
         const emailFound = users.find(user => user.email === email);
         if (emailFound) throw new InternalServerError("Email already exists");
-        const documentFound = users.find(user => user.document === document);
+        const documentFound = users.find(user => user.document == document);
         if (documentFound) throw new InternalServerError("Document already exists");
 
         const hashes = hashPwd(password);
