@@ -8,7 +8,7 @@ export class DocumentTypeUser extends BaseEntity {
     id: string;
     
     @Column ()
-    price: number;
+    price: string;
     
     @Column ()
     url: string;

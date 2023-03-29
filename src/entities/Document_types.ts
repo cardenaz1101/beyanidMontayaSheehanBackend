@@ -12,7 +12,7 @@ export class DocumentType extends BaseEntity {
     name: string;
     
     @Column ()
-    price: number;
+    price: string;
 
     @Column ()
     sort: number;
