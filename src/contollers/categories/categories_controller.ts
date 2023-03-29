@@ -4,8 +4,11 @@ import categories from "../../use_cases/categories/index";
 export class CategoriesController {
   async get(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-          const result = await categories.getAll();
-          res.status(200).json(result);
+      const {
+        query: { sortOrderType },
+      } = req;
+      const result = await categories.getAll(sortOrderType as string);
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }

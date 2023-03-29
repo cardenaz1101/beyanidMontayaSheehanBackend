@@ -14,6 +14,9 @@ export class DocumentType extends BaseEntity {
     @Column ()
     price: number;
 
+    @Column ()
+    sort: number;
+
     @OneToMany(() => Document, (document) => document.documentTypes)
     documents: Document[]
 

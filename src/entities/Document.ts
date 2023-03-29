@@ -16,6 +16,9 @@ export class Document extends BaseEntity {
     @Column ()
     type: string;
 
+    @Column ()
+    sort: number;
+
     @ManyToOne(() => DocumentType, (documentType) => documentType.documents)
     documentTypes: DocumentType
 }   

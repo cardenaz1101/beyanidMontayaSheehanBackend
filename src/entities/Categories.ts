@@ -11,6 +11,9 @@ export class Category extends BaseEntity {
     @Column ()
     name: string;
 
+    @Column ()
+    sort: number;
+
     @OneToMany(() => DocumentType, (documentType) => documentType.category)
     documentTypes: DocumentType[]
 }   
